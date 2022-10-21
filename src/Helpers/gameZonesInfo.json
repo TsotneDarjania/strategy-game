@@ -1,0 +1,10 @@
+{
+    "villageIcon" : {
+        "x" : "2",
+        "y" : "6"
+    },
+    "smallCastleIcon" : {
+        "x" : "15",
+        "y" : "7"
+    }
+}

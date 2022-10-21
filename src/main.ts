@@ -1,18 +1,21 @@
 import Phaser from 'phaser'
+import "./Helpers/WebFontLoader";
 
-import HelloWorldScene from './scenes/HelloWorldScene'
+import GamePlay from './scenes/gameplay'
+import Preload from './scenes/preload'
 
 const config: Phaser.Types.Core.GameConfig = {
 	type: Phaser.AUTO,
-	width: 800,
-	height: 600,
+	width: 1700,
+	height: 900,
+	backgroundColor: '#FFFAC5',
 	physics: {
 		default: 'arcade',
 		arcade: {
 			gravity: { y: 200 }
 		}
 	},
-	scene: [HelloWorldScene]
+	scene: [Preload,GamePlay]
 }
 
 export default new Phaser.Game(config)
