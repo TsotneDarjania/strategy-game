@@ -7,6 +7,9 @@ import BuildIcon from "~/ui/buildIcon";
 import BuildMenu from "~/ui/buildMenu";
 import Platforms from "~/gameObjects/ground";
 
+
+
+
 export default class GamePlay extends Phaser.Scene {
 
     public platforms! : Platforms;
@@ -20,6 +23,8 @@ export default class GamePlay extends Phaser.Scene {
     private height! : number;
 
     private clickSound! : any;
+
+
 
     constructor() {
         super("GamePlay")
@@ -44,7 +49,11 @@ export default class GamePlay extends Phaser.Scene {
         new Tree(this,700,700,"tree",10).setScale(0.5).setTint(0x0E255E);
         new Tree(this,900,700,"tree",5).setScale(0.6).setTint(0x08381F);
        
-        this.king = new King(this,500,600,"king");
+        this.king = new King(this,500,600,"king")
+        .on("move", () => {
+            this.buildMenu.close();
+        })
+        
 
         this.cameras.main.startFollow(this.king,true,0.08,0.08);
         this.cameras.main.setZoom(1.0);
@@ -62,10 +71,18 @@ export default class GamePlay extends Phaser.Scene {
         this.height = this.sys.game.canvas.height;
 
         this.buildMenu = new BuildMenu(this,this.width/2,this.height/2)
-        .on("buildBtnClick", (itemName) => {
-            this.king.build(itemName);
+        .on("buildBtnClick", (item) => {
+            this.build(item);
         });
 
         
+    }
+
+
+    build(item){
+        //let a = this.scene.add.image().getBounds()
+
+        //  let b = json;
+        ///  Phaser.Geom.Intersects.RectangleToRectangle()
     }
 }

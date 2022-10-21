@@ -6,7 +6,11 @@ export default class King extends Phaser.Physics.Arcade.Sprite{
     private velocity : number = 200;
     private walkSound! : Phaser.Sound.BaseSound;
 
-    private gameZonesInfo! : JSON;
+    private gameZonesInfo! : object;
+
+
+
+    
 
 
     constructor(scene : Phaser.Scene, x : number, y : number, key : string){
@@ -49,28 +53,14 @@ export default class King extends Phaser.Physics.Arcade.Sprite{
         this.setVelocityX(-this.velocity)
         this.anims.play("walk")
         this.walkSound.play();
+        this.emit("move");
     }
+
     toRight() {
         this.setFlip(false,false);
         this.setVelocityX(this.velocity)
         this.anims.play("walk")
         this.walkSound.play();
+        this.emit("move");
     }
-
-    build(item: object){
-      
-       // let alreadyBuild = 
-
-      // console.log(item["key"])
-    
-      // console.log(GameZoneInfo[item["key"]])
-    }
-
-    checkIfBuildPossible(){
-        Object.keys(GameZoneInfo).forEach(item => {
-            
-        });
-
-    }
-
 }

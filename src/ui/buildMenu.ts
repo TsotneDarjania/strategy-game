@@ -10,18 +10,22 @@ export default class BuildMenu extends Phaser.GameObjects.Container {
 
   itemsIndex: number = 0;
 
-  items: Object = {
-    0: {
+  items: Array<any> = [
+    {
       key: "villageIcon",
-      title: "VILLAGE",
-      free: 20,
+      title: "Village",
+      price: 20,
+      width : 100,
+      height : 70,
     },
-    1: {
+    {
       key: "smallCastleIcon",
       title: "Small Castle",
-      free: 50,
+      price: 50,
+      width : 100,
+      height : 70,
     },
-  };
+  ];
 
   constructor(scene: Phaser.Scene, x: number, y: number) {
     super(scene, x, y);
@@ -37,8 +41,8 @@ export default class BuildMenu extends Phaser.GameObjects.Container {
     this.addBackground();
     this.addTitle();
 
-    let { key, title, free } = this.items[this.itemsIndex];
-    this.addItems(key, title, free);
+    let { key, title, price,width, height } = this.items[this.itemsIndex];
+    this.addItems(key, title, price, width, height);
 
     this.setScale(0);
     this.setAlpha(0);
@@ -109,7 +113,7 @@ export default class BuildMenu extends Phaser.GameObjects.Container {
     this.add(titleText);
   }
 
-  addItems(icon_1_key: string, icon_1_title: string, freeNumber: number) {
+  addItems(icon_1_key: string, icon_1_title: string, priceNumber: number, width : number, height : number) {
     this.buildBtn = this.scene.add
       .image(0, 215, "buildBtn")
       .setDepth(100)
@@ -131,7 +135,7 @@ export default class BuildMenu extends Phaser.GameObjects.Container {
     this.add(this.buildBtn);
 
     this.free = this.scene.add
-      .text(0, 150, freeNumber.toString(), {
+      .text(0, 150, priceNumber.toString(), {
         fontFamily: '"Press Start 2P", cursive ',
         fontSize: "30px",
         color: "#FF7F59",
@@ -171,8 +175,8 @@ export default class BuildMenu extends Phaser.GameObjects.Container {
   changeItems() {
     this.removeOldItems();
 
-    let { key, title, free } = this.items[this.itemsIndex];
-    this.addItems(key, title, free);
+    let { key, title, price, width, height } = this.items[this.itemsIndex];
+    this.addItems(key, title, price, width, height);
   }
 
   removeOldItems() {
@@ -191,8 +195,6 @@ export default class BuildMenu extends Phaser.GameObjects.Container {
         cursor: "pointer",
       })
       .on(Phaser.Input.Events.POINTER_DOWN, () => {
-        //setMonthIndicator((monthIndicator + symbol + 12) % 12 );
-
         this.itemsIndex = (this.itemsIndex + 1 + 2) % 2;
 
         this.arroClickSound.play();
